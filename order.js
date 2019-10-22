@@ -12,13 +12,11 @@ class Order {
     } else {
       this.items[itemName] = quantity;
     }
+    this.total += this.priceList[itemName] * quantity;
   }
 
-  calculateTotal() {
-    for (let [item, quantity] of Object.entries(this.items)) {
-      this.total = this.total + this.priceList[item] * quantity;
-    }
-    return this.total;
+  getTotal() {
+    return Math.round(this.total * 100) / 100;
   }
   printReceipt() {
     return "Test Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.32\nTotal:\t\t\t£4.38";
