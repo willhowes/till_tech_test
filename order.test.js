@@ -37,7 +37,7 @@ describe("Order", () => {
       let order = new Order("Test Name", resturantInfo);
       order.addItem("Tea", 2);
       expect(order.printReceipt()).toEqual(
-        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t2 x 3.65\nTax\t\t\t0.64\nTotal:\t\t\t£8.76"
+        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t2 x 3.65\nTax\t\t\t1.46\nTotal:\t\t\t£8.76"
       );
     });
   });
