@@ -3,8 +3,12 @@ class Order {
     this.name = name;
     this.items = {};
     this.taxPercentage = 20;
-    this.total = 0;
+    this.runnningTotal = 0;
+    this.runningTaxTotal = 0;
     this.priceList = restuarantInfo[0].prices[0];
+    this.restuarantName = restuarantInfo[0].shopName;
+    this.restuarantAddress = restuarantInfo[0].address;
+    this.restaurantPhone = restuarantInfo[0].phone;
   }
   addItem(itemName, quantity) {
     if (itemName in this.items) {
@@ -12,14 +16,38 @@ class Order {
     } else {
       this.items[itemName] = quantity;
     }
-    this.total += this.priceList[itemName] * quantity;
+    this.runningTotal += this.priceList[itemName] * quantity;
+    this.runningTaxTotal +=
+      (this.priceList[itemName] * quantity * this.taxPercentage) / 100;
   }
 
-  getTotal() {
-    return Math.round(this.total * 100) / 100;
+  getRunningTotal() {
+    return Math.round(this.runnningTotal * 100) / 100;
   }
+
+  getRunningTaxTotal() {
+    return Math.round(this.runningTaxTotal * 100) / 100;
+  }
+
+  netTotal() {
+    return this.getRunningTotal() + this.getRunningTaxTotal();
+  }
+
   printReceipt() {
-    return "Test Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.32\nTotal:\t\t\t£4.38";
+    const orderDetails = `${this.restuarantName}\n\n${this.restuarantAddress}\nPhone: ${this.restaurantPhone}\n${this.name}\n`;
+    let orderItems = [];
+    Object.keys(this.items).forEach(item => {
+      orderItems.push(
+        `${item}\t\t\t${this.items[item]} x ${this.priceList[item]}`
+      );
+    });
+    let finalReceipt = "";
+    return finalReceipt.concat(
+      orderDetails,
+      orderItems,
+      `\nTax\t\t\t${this.runningTaxTotal}`,
+      `\nTotal:\t\t\t${this.netTotal()}`
+    );
   }
 }
 
