@@ -29,7 +29,7 @@ describe("Order", () => {
       let order = new Order("Test Name", resturantInfo);
       order.addItem("Tea", 1);
       expect(order.printReceipt()).toEqual(
-        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.61\nTotal:\t\t\t£3.65"
+        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.61\nTotal:\t\t\t£3.65\nCash:\t\t\t£0.00\nChange:\t\t\t£0.00"
       );
     });
 
@@ -37,7 +37,7 @@ describe("Order", () => {
       let order = new Order("Test Name", resturantInfo);
       order.addItem("Tea", 2);
       expect(order.printReceipt()).toEqual(
-        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t2 x 3.65\nTax\t\t\t1.22\nTotal:\t\t\t£7.30"
+        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t2 x 3.65\nTax\t\t\t1.22\nTotal:\t\t\t£7.30\nCash:\t\t\t£0.00\nChange:\t\t\t£0.00"
       );
     });
   });
@@ -47,5 +47,6 @@ describe("Order", () => {
     order.addItem("Chocolate Chip Muffin", 1);
     order.receivePayment(4.05);
     expect(order.getChangeDue()).toEqual("0.00");
+    expect(order.getPaymentReceived()).toEqual("4.05");
   });
 });

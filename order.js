@@ -10,6 +10,7 @@ class Order {
     this.restuarantAddress = restuarantInfo[0].address;
     this.restaurantPhone = restuarantInfo[0].phone;
     this.changeDue = 0;
+    this.paymentReceived = 0;
   }
   addItem(itemName, quantity) {
     this.addItemToOrder(itemName, quantity);
@@ -44,11 +45,16 @@ class Order {
   }
 
   receivePayment(amount) {
+    this.paymentReceived += amount;
     this.changeDue = amount - this.runningTotal;
   }
 
   getChangeDue() {
     return this.changeDue.toFixed(2);
+  }
+
+  getPaymentReceived() {
+    return this.paymentReceived.toFixed(2);
   }
 
   printReceipt() {
@@ -64,7 +70,9 @@ class Order {
       orderDetails,
       orderItems,
       `\nTax\t\t\t${this.getRunningTaxTotal()}`,
-      `\nTotal:\t\t\t£${this.getRunningTotal()}`
+      `\nTotal:\t\t\t£${this.getRunningTotal()}`,
+      `\nCash:\t\t\t£${this.getPaymentReceived()}`,
+      `\nChange:\t\t\t£${this.getChangeDue()}`
     );
   }
 }
