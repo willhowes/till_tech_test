@@ -40,6 +40,24 @@ describe("Order", () => {
         "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t2 x 3.65\nTax\t\t\t1.22\nTotal:\t\t\t£7.30\nCash:\t\t\t£0.00\nChange:\t\t\t£0.00"
       );
     });
+
+    it("Will print correct receipt after one order when payment has been made", () => {
+      let order = new Order("Test Name", resturantInfo);
+      order.addItem("Tea", 1);
+      order.receivePayment(3.65);
+      expect(order.printReceipt()).toEqual(
+        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.61\nTotal:\t\t\t£3.65\nCash:\t\t\t£3.65\nChange:\t\t\t£0.00"
+      );
+    });
+
+    it("Will print correct receipt after one order when payment has been made and will show change due", () => {
+      let order = new Order("Test Name", resturantInfo);
+      order.addItem("Tea", 1);
+      order.receivePayment(5);
+      expect(order.printReceipt()).toEqual(
+        "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\nTest Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.61\nTotal:\t\t\t£3.65\nCash:\t\t\t£5.00\nChange:\t\t\t£1.35"
+      );
+    });
   });
 
   describe("#receivePayment", () => {
