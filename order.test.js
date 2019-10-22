@@ -44,6 +44,8 @@ describe("Order", () => {
 
   describe("#receivePayment", () => {
     let order = new Order("Test Name", resturantInfo);
-    order.addItem("Chocolate Chip Muffin");
+    order.addItem("Chocolate Chip Muffin", 1);
+    order.receivePayment(4.05);
+    expect(order.getChangeDue()).toEqual("0.00");
   });
 });

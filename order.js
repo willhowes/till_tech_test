@@ -9,6 +9,7 @@ class Order {
     this.restuarantName = restuarantInfo[0].shopName;
     this.restuarantAddress = restuarantInfo[0].address;
     this.restaurantPhone = restuarantInfo[0].phone;
+    this.changeDue = 0;
   }
   addItem(itemName, quantity) {
     this.addItemToOrder(itemName, quantity);
@@ -40,6 +41,14 @@ class Order {
 
   getRunningTaxTotal() {
     return this.runningTaxTotal.toFixed(2);
+  }
+
+  receivePayment(amount) {
+    this.changeDue = amount - this.runningTotal;
+  }
+
+  getChangeDue() {
+    return this.changeDue.toFixed(2);
   }
 
   printReceipt() {
