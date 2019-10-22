@@ -4,7 +4,7 @@ class Order {
   }
   addItem(itemName, quantity) {}
   printReceipt() {
-    return "Barry\nTea\t\t\t1 x 3.65\nTax\t\t\t0.32\nTotal:\t\t\t£3.97";
+    return "Test Name\nTea\t\t\t1 x 3.65\nTax\t\t\t0.32\nTotal:\t\t\t£3.97";
   }
 }
 
