@@ -30,20 +30,16 @@ class Order {
 
   updateRunningTaxTotal(itemName, quantity) {
     this.runningTaxTotal +=
-      (this.priceList[itemName] * quantity * this.taxPercentage) / 100;
+      ((this.priceList[itemName] * quantity) / (this.taxPercentage + 100)) *
+      this.taxPercentage;
   }
 
   getRunningTotal() {
-    return Math.round(this.runningTotal * 100) / 100;
+    return this.runningTotal.toFixed(2);
   }
 
   getRunningTaxTotal() {
-    return Math.round(this.runningTaxTotal * 100) / 100;
-  }
-
-  netTotal() {
-    const netTotal = this.runningTotal + this.runningTaxTotal;
-    return netTotal;
+    return this.runningTaxTotal.toFixed(2);
   }
 
   printReceipt() {
@@ -58,8 +54,8 @@ class Order {
     return finalReceipt.concat(
       orderDetails,
       orderItems,
-      `\nTax\t\t\t${this.runningTaxTotal}`,
-      `\nTotal:\t\t\t£${this.netTotal()}`
+      `\nTax\t\t\t${this.getRunningTaxTotal()}`,
+      `\nTotal:\t\t\t£${this.getRunningTotal()}`
     );
   }
 }
