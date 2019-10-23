@@ -9,6 +9,7 @@ class Order {
     this.restuarantName = restuarantInfo[0].shopName;
     this.restuarantAddress = restuarantInfo[0].address;
     this.restaurantPhone = restuarantInfo[0].phone;
+    this.restaurantDiscounts = restuarantInfo[0].discounts;
     this.changeDue = 0;
     this.paymentReceived = 0;
   }

@@ -21,6 +21,24 @@
         "Chocolate Chip Muffin": 4.05,
         "Muffin Of The Day": 4.55
       }
+    ],
+    "discounts": [
+      {
+        "title": "10 % of All Muffins",
+        "type": "itemDiscount",
+        "discountedItems": [
+          "Blueberry Muffin",
+          "Chocolate Chip Muffin",
+          "Muffin Of The Day"
+        ],
+        "discountPercentage": 10
+      },
+      {
+        "title": "5% off orders above £50",
+        "type": "totalDiscount",
+        "discountThreshold": 50,
+        "discountPercentage": 5
+      }
     ]
   }
 ]
