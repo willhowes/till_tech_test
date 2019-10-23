@@ -45,8 +45,14 @@ class Order {
   }
 
   receivePayment(amount) {
-    this.paymentReceived += amount;
-    this.changeDue = amount - this.runningTotal;
+    if (amount < this.runningTotal) {
+      throw `Insufficient funds. Amount received: £${amount.toFixed(
+        2
+      )}, amount due: £${this.getRunningTotal()}`;
+    } else {
+      this.paymentReceived += amount;
+      this.changeDue = amount - this.runningTotal;
+    }
   }
 
   getChangeDue() {

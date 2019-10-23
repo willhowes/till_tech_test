@@ -61,10 +61,26 @@ describe("Order", () => {
   });
 
   describe("#receivePayment", () => {
-    let order = new Order("Test Name", resturantInfo);
-    order.addItem("Chocolate Chip Muffin", 1);
-    order.receivePayment(4.05);
-    expect(order.getChangeDue()).toEqual("0.00");
-    expect(order.getPaymentReceived()).toEqual("4.05");
+    it("Correctly confirms payment received and change due when exact amount paid", () => {
+      let order = new Order("Test Name", resturantInfo);
+      order.addItem("Chocolate Chip Muffin", 1);
+      order.receivePayment(4.05);
+      expect(order.getPaymentReceived()).toEqual("4.05");
+      expect(order.getChangeDue()).toEqual("0.00");
+    });
+    it("Correctly confirms change due when overpaid", () => {
+      let order = new Order("Test Name", resturantInfo);
+      order.addItem("Chocolate Chip Muffin", 1);
+      order.receivePayment(5);
+      expect(order.getPaymentReceived()).toEqual("5.00");
+      expect(order.getChangeDue()).toEqual("0.95");
+    });
+    it("Throws an error if insufficient funds received", () => {
+      let order = new Order("Test Name", resturantInfo);
+      order.addItem("Chocolate Chip Muffin", 1);
+      expect(() => {
+        order.receivePayment(4);
+      }).toThrowError("Insufficient funds.");
+    });
   });
 });
